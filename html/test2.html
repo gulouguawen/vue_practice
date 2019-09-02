@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<input v-model="content"/> <button v-on:click="handleClick">提交</button>
+		</div>
+	</body>
+</html>
+
+<script>
+	var vm = new Vue({
+		el : "#root",
+		data : {
+			content:"Test12"
+		},
+		methods : {
+			handleClick : function(){
+				console.log(this.content)
+			}
+		}
+	});
+	
+	/**
+	 * 添加一个点击事件：根据文本框中的值，点击按钮打印出来
+	 * 1. v-on : 用来绑定事件    v-on:click 绑定了点击事件
+	 * 2. v-model: 用来进行数据绑定 
+	 * 3. 事件函数：在v-on:click中调用，需要在Vue框架中的methods属性中定义函数
+	 * 4. console.log ： 这个是控制台中的日志
+	 * 5. 在函数中可以通过this.xxx的形式来调用Vue中data属性里定义的数据变量的值
+	 * 6. 如果Vue框架外，使用vm.$data.content方式来调用Vue中data属性里定义的数据变量的值
+	 */
+</script>
+

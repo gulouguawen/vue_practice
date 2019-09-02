@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <input v-model="message"/>
+    <button v-on:click="handleClick">提交</button>
+    <!-- <ul v-if="seen">
+        <li v-for="item in list">{{item}}</li>
+    </ul> -->
+
+    <ol>
+        <todo-item v-on:delete="handelDeleteItem" v-bind:content="item" v-bind:index="index"
+                   v-for="(item,index) in list"></todo-item>
+    </ol>
+</div>
+</body>
+</html>
+
+<script>
+    Vue.component("todo-item", {
+        props: ["content", "index"],
+        template: '<li v-on:click="handelItemDelete">{{content}}</li>',
+        methods: {
+            handelItemDelete: function () {
+                this.$emit("delete")
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: "#root",
+        data: {
+            seen: true,
+            message: "test",
+            list: ['上午还有一节课', '下午第一节课', '下午第二节课', '下午第三节课', '下午第四节课', '晚自习']
+        },
+        methods: {
+            handleClick: function () {
+                this.list.push(this.message);
+            },
+            handelDeleteItem: function (index) {
+                // console.log("123");
+                // 删除所在行
+                this.list.splice(index, 1);
+                // 删除整个list
+                // this.list = [];
+            }
+        }
+    });
+</script>
+<!-- 
+	v-for:(item,index) in list
+ -->

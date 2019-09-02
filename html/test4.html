@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!--
+		  Vue中的组件的使用
+		  将TODOLIST 中的<li>部分转变成组件的形式
+		  1.功能：完成点击item的一条记录，那么就自动删除这一条
+		  2.实现：修改，删除 主组件中list变量的值即可（需要一个下标来进行操作）
+		  3.子组件中使用this.$emit("delete");方式向主组件发起事件
+		  4.组件中监听delete事件，v-on:delete="触发一个事件（删除事件）"
+		  5.v-for="(item,index) in list" 来取得列表的下标
+		  6.将获取到的下标index给删除事件函数，作为它的参数传递给主组件的函数并调用
+		  7.index 使用数组函数方法splice(index,1)，删除一条记录
+		 -->
+		<div id="root">
+			<input v-model="message" /><button v-on:click="handleClick">提交</button>
+			<ul v-if="seen">
+				<li v-for="item in list">{{item}}</li>
+			</ul>
+			
+			<ol>
+				<todo-item v-on:delete="handleItemDelete(index)" 
+				v-bind:content="item" 
+				v-for="(item,index) in list"></todo-item>
+			</ol>
+		</div>
+	</body>
+</html>
+
+<script>
+	// Vue的组件 也是一个Vue实例  props里面值 它是单向传递的 ,由vue实例中变量传递到组件;
+	// 主组件传递到子组件
+	Vue.component("todo-item",{
+		props:["content"],
+		template: '<li v-on:click="handleItemClick">{{content}}</li>',
+		methods:{
+			handleItemClick:function(event){
+				this.$emit("delete");
+			}
+		}
+	});
+	
+	var vm = new Vue({
+		el : "#root",
+		data : {
+			seen: false,
+			message:"test",
+			list:['上午还有一节课','下午第一节课','下午第二节课','下午第三节课','下午第四节课','晚自习']
+		},
+		methods:{
+			handleClick:function() {
+				this.list.push(this.message);
+			},
+			handleItemDelete : function(index) {
+				this.list.splice(index,1);
+			}
+		}
+	});
+</script>
+<!--
+   v-for :   (item,index) in list
+-->

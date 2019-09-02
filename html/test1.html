@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			{{content}}
+		</div>
+		<div>
+			{{content}}
+		</div>
+	</body>
+</html>
+
+<script>
+	// var div = document.getElementById("root");
+	// div.innerHTML = "Test";
+	var vm = new Vue({
+		el : "#root",
+		data : {
+			content:"Test12"
+		}
+	});
+	
+	/**
+	 * el: 指定一个模板的ID，将这个模板绑定到Vue中去
+	 * data: 指定Vue中所使用的一些参数变量，以及值
+	 */
+	
+	// 动态修改
+	vm.$data.content = "开学了，今天是开学的第一天";
+</script>
+
