@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue中计算属性之Getter方法和Setter方法</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<p>FirstName:{{firstName}}</p>
+			<p>LastName:{{lastName}}</p>
+			<p>{{fullName}}</p>
+		</div>
+	</body>
+</html>
+<script>
+	var vm = new Vue({
+		el : "#root",
+		data:{
+			firstName:"Jack",
+			lastName:"zhang",
+			userid:"uid"
+		},
+		computed:{
+			fullName:{
+				get:function(){
+					// 验证该方法是否会被调用呢？
+					console.log("fullName Getter is executed...");
+					return this.firstName+" " + this.lastName;
+				},
+				set:function(newValue){
+					var names = newValue.split(' ')
+					this.firstName = names[0]
+					this.lastName = names[names.length - 1]
+					// this.fullName = newValue;
+					console.log("fullName Setter 方法："+newValue)
+				}
+			}
+		}
+	});
+</script>

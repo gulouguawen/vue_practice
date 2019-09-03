@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+v-once 指令：表示变量不支持改变，只使用一次
+插值表达式：{{content + " test"}}:插值表达式可以做字符串的运算
+v-text指令 和插值表达式一样
+v-html指令 能够将值当做html代码来运行
+
+他们都能够合字符串做运算
+
+表达式：计算后能返回一个值
+
+指令缩写：
+v-bind:  可以直接使用 :来代替
+v-on:    可以直接使用 @来代替
+-->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>模板语法</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<span>{{content +' dddd'}}</span>
+			<br />
+			<span  v-text="content +' test'" :id="uid"></span>
+			<br />
+			<span v-html="content +' ssss'" @click="handleClick"></span>
+		</div>
+	</body>
+</html>
+
+<script>
+	var vm = new Vue({
+		el : "#root",
+		data:{
+			content:"Hello World",
+			uid:"user2"
+		},
+		methods:{
+			handleClick:function(){
+				this.content = "Bye Bye 1";
+			}
+		}
+	});
+</script>

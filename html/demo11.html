@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+<body>
+<div id="root">
+    {{content}}
+</div>
+</body>
+</html>
+<script>
+    var vm = new Vue(
+        {
+            el: "#root",
+            data: {
+                content: 'Hello world!'
+            },
+            beforeCreate: function () {
+                console.log('BeforeCreate...')
+            },
+            created: function () {
+                console.log('Created...')
+            },
+            beforeMount: function () {
+                console.log(this.$el);
+                console.log('BeforeMount...')
+            },
+            mounted: function () {
+                console.log('Mounted...')
+            },
+        }
+    );
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性与侦听器</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 计算firstName 、lastName，fullName=firstName+lastName -->
+		<div id="root">
+			<p>FirstName:{{firstName}}</p>
+			<p>LastName:{{lastName}}</p>
+			<p>{{fullName}}</p>
+			<p>{{userid}}</p>
+		</div>
+	</body>
+</html>
+
+<script>
+	var vm = new Vue({
+		el : "#root",
+		data:{
+			firstName:"Jack",
+			lastName:"zhang",
+			userid:"uid",
+			fullName:"Jack zhang"
+		},
+		watch:{
+			firstName:function(val){
+				console.log("firstName:"+val)
+				this.fullName = val + " " +this.lastName;
+			},
+			lastName:function(val){
+				console.log("lastName:"+val)
+				this.fullName = this.firstName + " " + val;
+			}
+		}
+		// methods:{
+		// 	fullName:function(){
+		// 		console.log("fullName method is executed...");
+		// 		return this.firstName+" " + this.lastName;
+		// 	}
+		// }
+		// computed:{
+		// 	fullName:function(){
+		// 		// 验证该方法是否会被调用呢？
+		// 		console.log("fullName is executed...");
+		// 		return this.firstName+" " + this.lastName;
+		// 	}
+		// }
+	});
+	
+	// 总结：如果能够使用 计算属性/方法/侦听属性实现该功能,我们一律使用计算属性来实现
+	/**
+	 * 对比结果：
+		使用method的方式：页面渲染没有缓存
+		使用计算属性和侦听属性的方式，页面渲染时，都进行了缓存，
+		但是侦听属性的实现比计算属性的方式复杂的多，所以在能够使用三种方式的情况下，
+		建议一致使用计算属性的方式完成功能
+	 */
+</script>

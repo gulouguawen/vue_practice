@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Vue Practice</title>
     <script src="../js/vue.js"></script>
+    <script>
+        Vue.component('todo-item', {
+            template: '<li>这是个待办项</li>'
+        });
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        })
+    </script>
 </head>
 <body>
 <div id="app">
@@ -31,6 +40,20 @@
 <div id="app-6">
     <p>{{message}}</p>
     <input v-model="message">
+</div>
+<div>
+    <ol>
+        <todo-item></todo-item>
+    </ol>
+</div>
+<div id="app-7">
+    <ol>
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+        ></todo-item>
+    </ol>
 </div>
 </body>
 </html>
@@ -94,5 +117,20 @@
                 message: 'Hello vue!'
             }
         }
-    )
+    );
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    })
+
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                {id: 0, text: '蔬菜'},
+                {id: 1, text: '奶酪'},
+                {id: 2, text: '香肠'}1
+            ]
+        }
+    });
 </script>

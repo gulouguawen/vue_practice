@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue中if指令的使用</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<h1 v-if="user==1">登录成功的</h1>
+			<!-- <div>ddddd</div> -->
+			<template  v-else>
+				<h1>登录失败的</h1>
+			</template>
+			
+			<div v-if="type === 'A'">
+			  A
+			</div>
+			<div v-else-if="type === 'B'">
+			  B
+			</div>
+			<div v-else-if="type === 'C'">
+			  C
+			</div>
+			<div v-else-if="type === 'D'">
+			  D
+			</div>
+			<div v-else>
+			  Not A/B/C
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var vm = new Vue({
+		el:"#root",
+		data:{
+			seen:true,
+			user:5,
+			type:'A'
+		}
+	});
+</script>
+
