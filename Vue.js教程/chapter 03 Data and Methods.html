@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title></title>
-<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div id="app">
-	{{a}}
+    {{a}}
 </div>
 
 <script type="text/javascript">
-var data = { a : 1 };
-var vm = new Vue({
-	el   : "#app",
-	data : data
-});
+    var data = {
+        a: 1
+    };
+    var vm = new Vue({
+        el: "#app",
+        data: data
+    });
 
-vm.$watch('a', function(newVal, oldVal){
-	console.log(newVal, oldVal);
-})
+    vm.$watch('a', function (newVal, oldVal) {
+        console.log('newVal is：' + newVal, 'oldVal is' + oldVal);
+    })
 
-vm.$data.a = "test...."
-
+    vm.$data.a = "test...."
 </script>
 
 </body>
