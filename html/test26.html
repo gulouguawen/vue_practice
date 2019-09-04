@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作用域插槽与解构插槽 Prop</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<Child>
+				<template v-slot:header="slotProps">
+					<h1>{{slotProps.item+" "+slotProps.message}}</h1>
+				</template>
+				
+				<template v-slot:default="slotProps">
+					<h1>{{slotProps.item+" "+slotProps.message}}</h1>
+				</template>
+				
+				<template v-slot:footer="{message:msg}">
+					<h1>{{msg}}</h1>
+				</template>
+				
+				<template v-slot:main="{main='test'}">
+					<h1>{{main}}</h1>
+				</template>
+			</Child>
+		</div>
+	</body>
+</html>
+<!--
+  有时让插槽内容能够访问子组件中才有的数据是很有用的
+-->
+<script>
+	Vue.component("Child",{
+		data:function(){
+			return {
+				list:[1,2,3,4,5],
+				message:"Hello Message",
+				main:undefined
+			}
+		},
+		template:`
+					<div class="container">
+					  <header>
+						<slot v-for="item in list" :item="item" :message="message" name="header"></slot>
+						<slot name="footer" :message="message"></slot>
+						<slot name="main" :main="main"></slot>
+					  </header>
+					</div>
+		         `
+	})
+	var vm = new Vue({
+		el:"#root"
+	});
+</script>

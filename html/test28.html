@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>动态组件</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<button @click="buttonClick('child1')">Home</button>
+			<button @click="buttonClick('child2')">Posts</button>
+			<button @click="buttonClick('child3')">Archive</button>
+			<component v-bind:is="currentTabComponent"></component>
+		</div>
+	</body>
+</html>
+
+<script>
+	Vue.component("Child1",{
+		template:`
+		         <div>Home Component</div>
+				 `
+	})
+	
+	Vue.component("Child2",{
+		template:`
+		         <div>Posts Component</div>
+				 `
+	})
+	
+	Vue.component("Child3",{
+		template:`
+		         <div>Archive Component</div>
+				 `
+	})
+	
+	var vm = new Vue({
+		el:"#root",
+		data:{
+			currentTabComponent:"Child1"
+		},
+		methods:{
+			buttonClick:function(component){
+				this.currentTabComponent = component;
+			}
+		}
+	});
+</script>

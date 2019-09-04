@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>动态插槽名</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<Child>
+				<template #[dynamicSlotName]="slotProps">
+					<h1>{{slotProps.tab}}</h1>
+				</template>
+			</Child>
+		</div>
+	</body>
+</html>
+
+<script>
+	Vue.component("Child",{
+		data:function(){
+			return {
+				tab:{
+					tab1:"tab1",
+					tab2:"tab2",
+					tab3:"tab3"
+				},
+				tab1:"tab1",
+				tab2:"tab2",
+				tab3:"tab3"
+			}
+		},
+		template:`
+					<div>
+					<slot name="tab1" :tab="tab1"></slot>
+					<slot name="tab2" :tab="tab2"></slot>
+					<slot name="tab3" :tab="tab3"></slot>
+					</div>
+		         `
+	})
+	var vm = new Vue({
+		el:"#root",
+		data:{
+			dynamicslotname:"tab1"
+		}
+	});
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>子组件之间的传值</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<Child :message="'张三'"></Child>
+			<Child :message="'李四'"></Child>
+		</div>
+	</body>
+</html>
+
+<script>
+	Vue.prototype.bus = new Vue();
+	
+	Vue.component("Child",{
+		props:["message"],
+		data:function(){
+			return {message_:this.message}
+		},
+		template:"<div @click='divClick'>{{message_}}</div>",
+		methods:{
+			divClick:function(){
+				// console.log(this.message)
+				this.bus.$emit("change",this.message_);  // 可以向主组件传值
+			}
+		},
+		mounted:function(){
+			// console.log(this.message)
+			var that = this;
+			// var msg_ = this.message_;
+			this.bus.$on("change",function(msg){
+				console.log(msg);
+				that.message_ = msg;
+			});
+		}
+	});
+	
+	var vm = new Vue({
+		el:"#root",
+		data:{
+			content:""
+		}
+	});
+</script>
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>解析 DOM 模板时的注意事项 is的使用</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+	<!-- 		<Child :list="list">
+			
+			</Child> -->
+			<ul is="Child" :list="list"></ul>
+		</div>
+	</body>
+</html>
+
+<script>
+	Vue.component("Child",{
+		props:["list"],
+		template:`
+		         <ul><li v-for="item in list">{{item}}</li></ul>
+				 `
+	})
+	var vm = new Vue({
+		el:"#root",
+		data:{
+			list:[1,2,3,4,5]
+		}
+	});
+</script>

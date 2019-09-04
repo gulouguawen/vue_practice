@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-model指令</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<!--
+	v-model:text相当于
+	     v-bind:text
+		 v-on:input
+		 
+	用于组件上的话，一定需要使用$emit函数来进行触发input事件
+	-->
+	<body>
+		<div id="root">
+			<input v-model="text" />
+			<span>{{text}}</span>
+		</div>
+	</body>
+</html>
+
+<script>
+	var vm = new Vue({
+		el : "#root",
+		data:{
+			text:"msg"
+		}
+	});
+</script>
+

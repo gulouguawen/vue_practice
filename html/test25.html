@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>具名插槽</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<base-layout>
+				<template v-slot:header>
+				    header
+				</template>
+				dfsdfdsfdsfdsfsdfs
+				<template v-slot:main>
+				    main
+				</template>
+				<template v-slot:footer>
+				    footer
+				</template>
+				ssssss
+			</base-layout>
+		</div>
+	</body>
+</html>
+
+<script>
+	Vue.component("base-layout",{
+		template:`
+					<div class="container">
+					  <header>
+						<slot name="header"></slot>
+					  </header>
+					  <main>
+						<slot name="main"></slot>
+					  </main>
+					  <footer>
+						<slot name="footer"></slot>
+					  </footer>
+					  <slot></slot>
+					</div>
+		         `
+	})
+	
+	var vm = new Vue({
+		el:"#root",
+		data:{
+			
+		}
+	});
+</script>
